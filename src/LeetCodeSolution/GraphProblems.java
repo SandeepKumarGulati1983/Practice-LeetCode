@@ -39,8 +39,8 @@ public class GraphProblems {
 		//int[][]  trust = {{1,2}} ; int N = 2 ;
 		//int[][]  trust = {{1,3},{2,3}} ;  int N = 3 ;//[[1,3],[2,3]];
 		int[][]  trust = {{1,3},{2,3},{3,1}} ;  int N = 3 ;//[[1,3],[2,3],[3,1]]
-		//int[][]  trust = {}; int N = 1 ; // expected 1 
-		//int[][]  trust = {}; int N = 2 ; // expected -1
+		//int[][]  trust = {}; int N = 1 ; // expected 1  -- because if only one preson not trusting him then he is the judge 
+		//int[][]  trust = {}; int N = 2 ; // expected -1  -- because if there  are 2 person and both are not trusting each other then there is no judge 
 		System.out.println (ans.findJudge(N,trust));
 
 	}
