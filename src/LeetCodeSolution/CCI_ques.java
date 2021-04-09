@@ -3,6 +3,9 @@ package LeetCodeSolution;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Stack;
+
+import Utils.ListNode;
 
 public class CCI_ques {
 	CCI_ques(){
@@ -706,73 +709,249 @@ public class CCI_ques {
 	}
 
 
-	public LinkNode partition(LinkNode head, int x) {
+	public LinkNode partition(LinkNode node, int x) {
 
-		if (head == null || head.next == null) return head ;
-		
-		
-		LinkNode  lastNode = null;
-		LinkNode firstnode =head;
-		LinkNode  parent = head ;
-		//LinkNode  root = head ;
-		
-		int count =0;
-		while (head != null ) {
-			count++;
-			lastNode = head ;
-			head = head.next;
-		}
-		
-		
-		while (count !=0) {
-			count--;
-			LinkNode next = parent.next;
-			
-			if (parent.val>x) {
-				firstnode   = parent.next ;
-				parent.next = null ;
-				lastNode.next  = parent;
-				lastNode = lastNode.next ;
-				parent = next ;
-				
-			}else if (next != null && next.val >x){
-				parent.next = next.next ;
-				parent  =parent.next;
-				
-				next.next = null;
-				lastNode.next  = next;
-				lastNode = lastNode.next ;
-				
-			}else {
-				parent = parent.next;
+
+
+		LinkNode head = node;
+		LinkNode tail= node;
+		while (node != null) {
+			LinkNode next = node.next;
+			if (node.val < x) {
+				/* Ins ert node at head. */
+				node.next= head;
+				head= node;
+			} else {
+				/* Insert node at tail. */
+				tail.next= node;
+				tail= node;
 			}
+			node= next ;
+		}
+		tail.next = null;
+		return head ;
+
+
+	}
+
+	// cci - 2.5 sum ists 
+
+	// 12 , 1000012  = 1000024
+	LinkNode sumlists(LinkNode l1 , LinkNode l2) {
+
+		LinkNode oList = null;
+		LinkNode oListHead = null;
+
+		int sum = 0;
+		int lastDigit =0;
+		int carryForward=0;
+		boolean firsttime = true;
+
+		while (l1 != null || l2 != null) {
+
+			if (l1 != null & l2 != null) {
+				sum = (l1.val + l2.val ) +carryForward;
+				l1 = l1.next ;
+				l2 = l2.next ;
+			}else if (l1 != null  && l2 == null) {
+				l1 = l1.next ;		
+				sum = l1.val  +carryForward;
+			}else if (l2 != null  && l1 == null) {
+				sum = l2.val  +carryForward;
+				l2 = l2.next ;
+			}
+			carryForward =0;
+			if (sum >= 10) {
+
+				lastDigit = sum % 10;
+				carryForward = sum /10 ;
+
+			}else {
+				lastDigit = sum ;
+			}
+
+			if (oList == null) {
+				oList = new LinkNode(lastDigit);
+				oListHead = oList;
+			}else {
+				oList.next = new LinkNode(lastDigit);
+				oList = oList.next ;
+			}
+
+
+		}
+
+		if (carryForward != 0) {
+			oList = new LinkNode(carryForward); 
+		}
+
+
+		return oListHead;
+
+	}
+	
+	//cci - 2.6 palindrom 
+	
+	boolean isPalindrom (LinkNode head ) {
+		
+		//WRONG
+		// ttraverse to find the length 
+		// then after half - reverese teh next half 
+		// with 2 pointer , compare each eement 
+		
+		// RIGHT 
+		/*
+		 * traverse to mid with slow and fast pointer approch 
+		 * then reverse teh next half with stack 
+		 */
+		
+		LinkNode slowP = head  ;
+		LinkNode fastP  = head ; 
+		LinkNode tail  = head ;
+		
+		if (head ==  null || head.next == null) return false ; // for 0 and 1 element 
+		
+		while (fastP.next !=null && fastP.next.next != null){
 			
+			slowP = slowP.next;
+			fastP = fastP.next.next;
 			
 		}
 		
-		return firstnode;
 		
+		Stack<LinkNode> stack = new Stack<>();
+		while (slowP.next != null) {
+			stack.push(slowP.next);
+			slowP = slowP.next;
+			
+		}
+		
+		while(!stack.isEmpty()) {
+			LinkNode halfList = stack.pop();
+			if (tail.val != halfList.val) return false ;
+			tail = tail.next;
+		}
+		
+		return true;
+		
+	}
+	
+	ListNode intersection(ListNode n1 , ListNode n2 ) {
+		
+		int sizeofL1 =0;
+		int sizeofL2 =0;
+		int diff =0;
+		ListNode n1Head =n1;
+		ListNode n2Head = n2 ;
+		
+		if (n1 == null && n2 == null) return new ListNode();
+		if (n1==null ) return n2;
+		if (n2==null ) return n1; 
+		
+		while (n1Head!=null) {
+			sizeofL1++;
+			n1Head = n1Head.next;
+		}
+		
+		while (n2Head != null) {
+			sizeofL2 ++ ;
+			n2Head = n2Head.next;
+		}
+		
+		
+		if (sizeofL1 >sizeofL2) {
+			while (sizeofL1 -sizeofL2 >0) {
+				sizeofL1--;
+				n1 = n1.next;
+			}
+		}else {
+			while (sizeofL2 -sizeofL1 >0) {
+				sizeofL2--;
+				n2 = n2.next;
+			}
+		}
+		
+		while (n1 != null ) {
+			if (n1 ==n2) return n1;
+			n1 = n1.next;
+			n2 = n2.next;
+		}
+		return new ListNode();
 		
 	}
 
 	public static void main(String[] args) {
 
-		CCI_ques className = new CCI_ques();
+		// intersection 2.7 
+		CCI_ques ins = new CCI_ques();
+//		l1.insert(1);
+//		l1.
+//		CCI_ques l2  = new CCI_ques();
+		
+		ListNode  node1 = new ListNode(1);
+		ListNode  node2 = new ListNode(2);
+		node1.next = node2;
+		ListNode  node3 = new ListNode(3);
+		node2.next = node3;
+		ListNode  node4 = new ListNode(4);
+		node3.next = node4;
+		ListNode  node5 = new ListNode(5);
+		node4.next = node5;
+		ListNode  node6 = new ListNode(6);
+		ListNode  node7 = new ListNode(7);
+		
+		node6.next = node7;
+		node7.next = node4;
+		ListNode ans =ins.intersection(node1,node6);
+		System.out.println(ans.val);
+		
+		// 12345  // 6745
+		
+		
+		// 2.6 -palindrom 
+//		CCI_ques list = new CCI_ques();
+//		list.insert(1);
+//		list.insert(2);
+//		list.insert(3);
+//		list.insert(3);
+//		list.insert(2);
+//		LinkNode root = list.insert(1);
+//		
+//		System.out.println(list.isPalindrom(root));
+		
+//		CCI_ques class1 = new CCI_ques();
+//		CCI_ques class2  = new CCI_ques();
+//
+//		//class1.insert ();
+//		class1.insert (1);
+//		LinkNode head1 = class1.insert (2);
+//
+//		class2.insert (1);
+//		class2.insert (0);
+//		class2.insert (1);
+//		LinkNode head2 = class2.insert (2);
+//
+//		LinkNode ans = class1.sumlists(head1, head2);
+//
+//		while (ans != null) {
+//			System.out.println(ans.val);
+//			ans = ans.next;
+//		}
 
 		// remove dups from unsorted linked list 
-		className.insert(3);
-		className.insert(5);
-		className.insert(8);
-		className.insert(5);
-		className.insert(10);
-		className.insert(2);
-		LinkNode ll = className.insert(1);
-		LinkNode list = className.partition(ll,5);
+		//		className.insert(3);
+		//		className.insert(5);
+		//		className.insert(8);
+		//		className.insert(5);
+		//		className.insert(10);
+		//		className.insert(2);
+		//		LinkNode ll = className.insert(1);
+		//		LinkNode list = className.partition(ll,5);
 
-		while (list != null) {
-			System.out.println(list.val);
-			list = list.next;
-		}
+		//		while (list != null) {
+		//			System.out.println(list.val);
+		//			list = list.next;
+		//		}
 
 		//className.kthTolast_iterative(ll, 2 ) ;
 		//className.kthTolast(ll, 3);
