@@ -1,7 +1,7 @@
 package LeetCodeSolution;
 
 
-import Utils.TrieNode;
+import myUtils.TrieNode;
 
 public class TrieDictionary_ques {
 

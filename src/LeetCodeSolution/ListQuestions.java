@@ -1,7 +1,7 @@
 package LeetCodeSolution;
 
 
-import Utils.ListNode;
+import myUtils.ListNode;
 
 public class ListQuestions {
 

@@ -3,7 +3,7 @@ package LeetCodeSolution;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import Utils.TreeNode;
+import myUtils.TreeNode;
 
 public class Tree_Leetcode {
 

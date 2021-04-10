@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Stack;
 
-import Utils.ListNode;
+import myUtils.ListNode;
 
 public class CCI_ques {
 	CCI_ques(){
@@ -879,11 +879,35 @@ public class CCI_ques {
 		return new ListNode();
 		
 	}
+	
+	
+	
+	
+	
+	//=================== day 4 ==========================
+	
+	// Find all triplets with zero sum
+	
+	Arrays[][] triplet(Arrays a , int triplet){
+		
+		
+		// Question for array  -- sorted / unsorted , dup or not , +ve or -ve 
+		
+		
+		return null;
+	}
+	
+	// Generate all binary strings from given pattern
+	
 
 	public static void main(String[] args) {
 
 		// intersection 2.7 
 		CCI_ques ins = new CCI_ques();
+		
+		
+		
+		
 //		l1.insert(1);
 //		l1.
 //		CCI_ques l2  = new CCI_ques();
