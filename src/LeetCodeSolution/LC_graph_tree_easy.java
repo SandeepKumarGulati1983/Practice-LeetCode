@@ -354,7 +354,7 @@ public class LC_graph_tree_easy {
 
 	boolean left = false ; 
 	boolean right = false ;
-	public boolean isSubtree(TreeNode s, TreeNode t) {
+	public boolean isSubtree1(TreeNode s, TreeNode t) {
 
 		if(s == null || t == null) return false ;
 
@@ -366,7 +366,7 @@ public class LC_graph_tree_easy {
 			isSubtree(s.left, t.left);
 			isSubtree(s.right, t.right);
 		}else {
-			
+
 			left = false ;
 			right =false;
 			isSubtree(s.left, t);
@@ -375,9 +375,9 @@ public class LC_graph_tree_easy {
 		return left && right ;
 
 	}
-	
+
 	Stack pillsForFilterArea(String[] filterArray, int oneRowCharCapacity, int rows) {
-		
+
 		Stack<String> stackOfDisplaypills = new Stack<>();
 		Stack<String> stackOfElipsisList = new Stack<>();
 		int charCount =0;
@@ -388,31 +388,145 @@ public class LC_graph_tree_easy {
 			}else {
 				stackOfElipsisList.push (filterArray[i]); // use this for elipsis list.
 			}
-			
+
 		}
 		return stackOfDisplaypills;
 	}
+
+	public boolean isSubtree(TreeNode s, TreeNode t) {
+
+		// look for t's root in s 
+		// if found ,
+		//then run a BFS with each node of t 
+
+
+		Queue<TreeNode> queue = new LinkedList<>();
+
+		queue.add(s);
+		TreeNode currentNode;
+		while(!queue.isEmpty()) {
+
+			for(int i =0 ; i<queue.size() ; i++) {
+				currentNode = queue.remove();
+				if (currentNode == t) {
+					break;
+				}
+
+
+			}
+		}
+
+		queue.clear();
+		queue.add(s);
+
+		while(!queue.isEmpty()) {
+			for(int i =0 ; i<queue.size() ; i++) {
+				currentNode = queue.remove();
+				if (currentNode == t) {
+					break;
+				}
+
+
+			}
+		}
+		return left;
+
+	}
+
+	//589 - N array preorder traversal 
+
+	class NArrayNode {
+		public int val;
+		public List<NArrayNode> children;
+
+		public NArrayNode() {}
+
+		public NArrayNode(int _val) {
+			val = _val;
+		}
+
+		public NArrayNode(int _val, List<NArrayNode> _children) {
+			val = _val;
+			children = _children;
+		}
+	}
+
+	NArrayNode getnArrayNode(int val,List<NArrayNode> _children ) {
+		return new NArrayNode(val,_children);
+	}
+
+	List<Integer> gList= new ArrayList<>();
+
+	public List<Integer> preorder(NArrayNode root) {
+
+		if (root == null) return new ArrayList<>();
+		gList.add(root.val);
+		for (int i = 0 ; i < root.children.size() ; i++) {
+
+			preorder(root.children.get(i));
+		}
+		return gList;
+	}
+
+	//606. Construct String from Binary Tree
+	StringBuffer str = new StringBuffer();
+	public String tree2str(TreeNode t) {
+
+		if (t == null) return str.toString();
 	
+		str.append(t.val+"("+ tree2str(t.left) + ")" + "("+tree2str(t.right)+")");
+	
+		return str.toString();
+	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		LC_graph_tree_easy ins = new LC_graph_tree_easy();
-		String[] filterlabels = {"a", "ab", "abc", "abcdef", "abcdefghijkl"};
-		Stack displayPills = ins.pillsForFilterArea(filterlabels , 5, 2);
-		while(!displayPills.isEmpty()) {
-			System.out.println(displayPills.pop());
-		}
+
+		TreeNode root = ins.getTreeNode(1);
+				root.left = ins.getTreeNode(2);
+				root.right = ins.getTreeNode(3);
+				//root.left.left = ins.getTreeNode(2);
+				root.left.right = ins.getTreeNode(4);
+				String str  = ins.tree2str(root);
+				System.out.println(str);
 		
-		
+		//589
+//		NArrayNode root = ins.getnArrayNode(1,new ArrayList<NArrayNode>());
+//		NArrayNode node1 = ins.getnArrayNode(3,new ArrayList<NArrayNode>());
+//		NArrayNode node2 = ins.getnArrayNode(2,new ArrayList<NArrayNode>());
+//		NArrayNode node3 = ins.getnArrayNode(4,new ArrayList<NArrayNode>());
+//		NArrayNode node4 = ins.getnArrayNode(5,new ArrayList<NArrayNode>());
+//		NArrayNode node5 = ins.getnArrayNode(6,new ArrayList<NArrayNode>());
+//
+//		root.children.add(node1);
+//		root.children.add(node2);
+//		root.children.add(node3);
+//		node3.children.add(node4);
+//		node3.children.add(node5);
+//
+//		List<Integer> ansList = ins.preorder(root);
+//
+//		System.out.println(ansList);
+
+
+		//		String[] filterlabels = {"a", "ab", "abc", "abcdef", "abcdefghijkl"};
+		//		Stack displayPills = ins.pillsForFilterArea(filterlabels , 5, 2);
+		//		while(!displayPills.isEmpty()) {
+		//			System.out.println(displayPills.pop());
+		//		}
+
+
 		//LC_graph_tree_easy ins = new LC_graph_tree_easy();
 
 		//543
-//		TreeNode root = ins.getTreeNode(1);
-//		root.left = ins.getTreeNode(2);
-//		root.right = ins.getTreeNode(3);
-//		root.left.left = ins.getTreeNode(2);
-//		root.left.right = ins.getTreeNode(2);
-//		int dia  = ins.diameterOfBinaryTree(root);
-//		System.out.println(dia);
+		//		TreeNode root = ins.getTreeNode(1);
+		//		root.left = ins.getTreeNode(2);
+		//		root.right = ins.getTreeNode(3);
+		//		root.left.left = ins.getTreeNode(2);
+		//		root.left.right = ins.getTreeNode(2);
+		//		int dia  = ins.diameterOfBinaryTree(root);
+		//		System.out.println(dia);
 
 		//501. Find Mode in Binary Search Tree
 		//		TreeNode root = ins.getTreeNode(1);
