@@ -473,41 +473,120 @@ public class LC_graph_tree_easy {
 	public String tree2str(TreeNode t) {
 
 		if (t == null) return str.toString();
-	
-		str.append(t.val+"("+ tree2str(t.left) + ")" + "("+tree2str(t.right)+")");
-	
+
+		str.append("("+t.val);
+		tree2str(t.left);
+		tree2str(t.right);
+		str.append(")");
 		return str.toString();
+	}
+
+	//617. Merge Two Binary Trees
+
+	public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
+
+
+		if (root1 == null && root2 == null ) {
+			return null;
+		}
+		if (root1 ==null) {
+			return root2;
+		}
+		if (root2 == null) {
+			return root1;
+		}
+
+		root1.left = mergeTrees(root1.left, root2.left);
+		root1.right = mergeTrees(root1.right, root2.right);
+
+		root1.val += root2.val;
+		return root1;
+
+
+	}
+
+	//637. Average of Levels in Binary Tree
+
+	public List<Double> averageOfLevels(TreeNode root) {
+
+		List<Double> averageList = new ArrayList<>();
+		Queue<TreeNode> queue = new LinkedList<>();
+		queue.add(root);
+		
+		while(!queue.isEmpty()) {
+			double totalnode = queue.size();
+			double sum = 0;
+			for (int i = 0 ; i < totalnode; i++) {
+				TreeNode currentnode = queue.remove();
+				if (currentnode.left != null)queue.add(currentnode.left);
+				if (currentnode.right != null)queue.add(currentnode.right);
+				
+				sum += currentnode.val;
+				
+			}
+			
+			double average = sum/totalnode ;
+			averageList.add(average);
+			
+		}
+		
+		return averageList ;
+		
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		LC_graph_tree_easy ins = new LC_graph_tree_easy();
-
-		TreeNode root = ins.getTreeNode(1);
-				root.left = ins.getTreeNode(2);
-				root.right = ins.getTreeNode(3);
-				//root.left.left = ins.getTreeNode(2);
-				root.left.right = ins.getTreeNode(4);
-				String str  = ins.tree2str(root);
-				System.out.println(str);
 		
+		//637. Average of Levels in Binary Tree
+		//root = [3,9,20,null,15,7]
+		TreeNode root = ins.getTreeNode(3);
+		 root.left = ins.getTreeNode(9);
+		root.right = ins.getTreeNode(20);
+		root.left.right = ins.getTreeNode(15);
+		root.right.left = ins.getTreeNode(7);
+		
+		System.out.println(ins.averageOfLevels(root));
+		
+		
+//		//tree1
+//		TreeNode root1 = ins.getTreeNode(1);
+//		root1.left = ins.getTreeNode(2);
+//		root1.right = ins.getTreeNode(3);
+//		//tree2
+//		TreeNode root2 = ins.getTreeNode(4);
+//		root2.left = ins.getTreeNode(5);
+//		root2.right = ins.getTreeNode(6);
+//		TreeNode mergeTree = ins.mergeTrees(root1, root2);
+
+//		System.out.println(mergeTree.val +" "+ mergeTree.left.val +" " + mergeTree.right.val);
+
+
+		//		TreeNode root = ins.getTreeNode(1);
+		//		root.left = ins.getTreeNode(2);
+		//		root.right = ins.getTreeNode(3);
+		//		//root.left.left = ins.getTreeNode(2);
+		//		root.left.right = ins.getTreeNode(4);
+		//		String str  = ins.tree2str(root);
+		//		System.out.println(str);
+
 		//589
-//		NArrayNode root = ins.getnArrayNode(1,new ArrayList<NArrayNode>());
-//		NArrayNode node1 = ins.getnArrayNode(3,new ArrayList<NArrayNode>());
-//		NArrayNode node2 = ins.getnArrayNode(2,new ArrayList<NArrayNode>());
-//		NArrayNode node3 = ins.getnArrayNode(4,new ArrayList<NArrayNode>());
-//		NArrayNode node4 = ins.getnArrayNode(5,new ArrayList<NArrayNode>());
-//		NArrayNode node5 = ins.getnArrayNode(6,new ArrayList<NArrayNode>());
-//
-//		root.children.add(node1);
-//		root.children.add(node2);
-//		root.children.add(node3);
-//		node3.children.add(node4);
-//		node3.children.add(node5);
-//
-//		List<Integer> ansList = ins.preorder(root);
-//
-//		System.out.println(ansList);
+		//		NArrayNode root = ins.getnArrayNode(1,new ArrayList<NArrayNode>());
+		//		NArrayNode node1 = ins.getnArrayNode(3,new ArrayList<NArrayNode>());
+		//		NArrayNode node2 = ins.getnArrayNode(2,new ArrayList<NArrayNode>());
+		//		NArrayNode node3 = ins.getnArrayNode(4,new ArrayList<NArrayNode>());
+		//		NArrayNode node4 = ins.getnArrayNode(5,new ArrayList<NArrayNode>());
+		//		NArrayNode node5 = ins.getnArrayNode(6,new ArrayList<NArrayNode>());
+		//
+		//		root.children.add(node1);
+		//		root.children.add(node2);
+		//		root.children.add(node3);
+		//		node3.children.add(node4);
+		//		node3.children.add(node5);
+		//
+		//		List<Integer> ansList = ins.preorder(root);
+		//
+		//		System.out.println(ansList);
 
 
 		//		String[] filterlabels = {"a", "ab", "abc", "abcdef", "abcdefghijkl"};
