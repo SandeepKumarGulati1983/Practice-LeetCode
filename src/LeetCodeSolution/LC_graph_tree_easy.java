@@ -376,23 +376,7 @@ public class LC_graph_tree_easy {
 
 	}
 
-	Stack pillsForFilterArea(String[] filterArray, int oneRowCharCapacity, int rows) {
-
-		Stack<String> stackOfDisplaypills = new Stack<>();
-		Stack<String> stackOfElipsisList = new Stack<>();
-		int charCount =0;
-		for (int i =0 ; i < filterArray.length ; i++) {
-			charCount += filterArray[i].length();
-			if(charCount < rows*oneRowCharCapacity) {
-				stackOfDisplaypills.push(filterArray[i]); // use this of displaying pills 
-			}else {
-				stackOfElipsisList.push (filterArray[i]); // use this for elipsis list.
-			}
-
-		}
-		return stackOfDisplaypills;
-	}
-
+	
 	public boolean isSubtree(TreeNode s, TreeNode t) {
 
 		// look for t's root in s 
@@ -533,21 +517,52 @@ public class LC_graph_tree_easy {
 		return averageList ;
 		
 	}
+	
+	// 700 search in a binary tree 
+	public TreeNode searchBST(TreeNode root, int val) {
+        while(root != null && root.val != val){
+            root = val<root.val? root.left:root.right;
+        }
+        return root;
+    }
 
+	Stack pillsForFilterArea(String[] filterArray, int oneRowCharCapacity, int rows) {
+
+		Stack<String> stackOfDisplaypills = new Stack<>();
+		Stack<String> stackOfElipsisList = new Stack<>();
+		int charCount =0;
+		for (int i =0 ; i < filterArray.length ; i++) {
+			charCount += filterArray[i].length();
+			if(charCount < rows*oneRowCharCapacity) {
+				stackOfDisplaypills.push(filterArray[i]); // use this of displaying pills 
+			}else {
+				stackOfElipsisList.push (filterArray[i]); // use this for elipsis list.
+			}
+
+		}
+		return stackOfDisplaypills;
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		LC_graph_tree_easy ins = new LC_graph_tree_easy();
 		
+		String[] filterlabels = {"billing ", "billing due ", "new bill arrieved ", "abcnnnnnnnndef", "abvvvvvvvcdefghijkl"};
+		Stack displayPills = ins.pillsForFilterArea(filterlabels , 50, 1);
+		while(!displayPills.isEmpty()) {
+			System.out.println(displayPills.pop());
+		}
+		
 		//637. Average of Levels in Binary Tree
 		//root = [3,9,20,null,15,7]
-		TreeNode root = ins.getTreeNode(3);
-		 root.left = ins.getTreeNode(9);
-		root.right = ins.getTreeNode(20);
-		root.left.right = ins.getTreeNode(15);
-		root.right.left = ins.getTreeNode(7);
-		
-		System.out.println(ins.averageOfLevels(root));
-		
+//		TreeNode root = ins.getTreeNode(3);
+//		 root.left = ins.getTreeNode(9);
+//		root.right = ins.getTreeNode(20);
+//		root.left.right = ins.getTreeNode(15);
+//		root.right.left = ins.getTreeNode(7);
+//		
+//		System.out.println(ins.averageOfLevels(root));
+//		
 		
 //		//tree1
 //		TreeNode root1 = ins.getTreeNode(1);
@@ -589,11 +604,7 @@ public class LC_graph_tree_easy {
 		//		System.out.println(ansList);
 
 
-		//		String[] filterlabels = {"a", "ab", "abc", "abcdef", "abcdefghijkl"};
-		//		Stack displayPills = ins.pillsForFilterArea(filterlabels , 5, 2);
-		//		while(!displayPills.isEmpty()) {
-		//			System.out.println(displayPills.pop());
-		//		}
+				
 
 
 		//LC_graph_tree_easy ins = new LC_graph_tree_easy();
