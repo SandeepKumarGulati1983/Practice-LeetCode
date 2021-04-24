@@ -376,7 +376,7 @@ public class LC_graph_tree_easy {
 
 	}
 
-	
+
 	public boolean isSubtree(TreeNode s, TreeNode t) {
 
 		// look for t's root in s 
@@ -496,7 +496,7 @@ public class LC_graph_tree_easy {
 		List<Double> averageList = new ArrayList<>();
 		Queue<TreeNode> queue = new LinkedList<>();
 		queue.add(root);
-		
+
 		while(!queue.isEmpty()) {
 			double totalnode = queue.size();
 			double sum = 0;
@@ -504,28 +504,29 @@ public class LC_graph_tree_easy {
 				TreeNode currentnode = queue.remove();
 				if (currentnode.left != null)queue.add(currentnode.left);
 				if (currentnode.right != null)queue.add(currentnode.right);
-				
+
 				sum += currentnode.val;
-				
+
 			}
-			
+
 			double average = sum/totalnode ;
 			averageList.add(average);
-			
+
 		}
-		
+
 		return averageList ;
-		
+
 	}
-	
+
 	// 700 search in a binary tree 
 	public TreeNode searchBST(TreeNode root, int val) {
-        while(root != null && root.val != val){
-            root = val<root.val? root.left:root.right;
-        }
-        return root;
-    }
+		while(root != null && root.val != val){
+			root = val<root.val? root.left:root.right;
+		}
+		return root;
+	}
 
+	// office work  -- pills logic for filter section 
 	Stack pillsForFilterArea(String[] filterArray, int oneRowCharCapacity, int rows) {
 
 		Stack<String> stackOfDisplaypills = new Stack<>();
@@ -542,39 +543,95 @@ public class LC_graph_tree_easy {
 		}
 		return stackOfDisplaypills;
 	}
+
+	//1022. Sum of Root To Leaf Binary Numbers
+	public int sumRootToLeaf(TreeNode root) {
+
+		Stack<TreeNode> stack = new Stack<>();
+		stack.push(root);
+		
+		Stack<String> stringStack = new Stack<>();
+		
+		String string = ""; 
+		stringStack.push(Integer.toString(root.val));
+		int sum = 0;
+		
+ 		while(!stack.isEmpty()) {
+			TreeNode currentNode = stack.pop();
+			String rootString = stringStack.pop(); 
+			System.out.println("------"+rootString);
+			
+			
+			if(currentNode.left == null && currentNode.right == null) {
+				System.out.println(rootString);
+				sum += Integer.parseInt(rootString.toString(),2);
+				
+			}
+			
+			if (currentNode.left !=null) {
+				stack.push(currentNode.left);
+				string = rootString+Integer.toString(currentNode.left.val);
+				stringStack.push(string);
+				
+			}
+			if(currentNode.right != null) {
+				stack.push(currentNode.right);
+				string = rootString+ Integer.toString(currentNode.right.val);
+				stringStack.push(string);
+			}
+		}
+		
+ 		return sum;
+	}
 	
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		LC_graph_tree_easy ins = new LC_graph_tree_easy();
 		
-		String[] filterlabels = {"billing ", "billing due ", "new bill arrieved ", "abcnnnnnnnndef", "abvvvvvvvcdefghijkl"};
-		Stack displayPills = ins.pillsForFilterArea(filterlabels , 50, 1);
-		while(!displayPills.isEmpty()) {
-			System.out.println(displayPills.pop());
-		}
 		
+		// 1022
+		//root = [1,0,1,0,1,0,1]
+						TreeNode root = ins.getTreeNode(1);
+						 root.left = ins.getTreeNode(0);
+						root.right = ins.getTreeNode(1);
+						root.left.left = ins.getTreeNode(0);
+						root.left.right = ins.getTreeNode(1);
+						root.right.left = ins.getTreeNode(0);
+						root.right.right = ins.getTreeNode(1);
+						System.out.println(ins.sumRootToLeaf(root));
+		
+		
+ //office work - telstra Ui -- filter pills logic 
+//		String[] filterlabels = {"billing ", "billing due ", "new bill arrieved ", "abcnnnnnnnndef", "abvvvvvvvcdefghijkl"};
+//		Stack displayPills = ins.pillsForFilterArea(filterlabels , 50, 1);
+////		while(!displayPills.isEmpty()) {
+////			System.out.println(displayPills.pop());
+////		}
+//		System.out.println(displayPills);
+
 		//637. Average of Levels in Binary Tree
 		//root = [3,9,20,null,15,7]
-//		TreeNode root = ins.getTreeNode(3);
-//		 root.left = ins.getTreeNode(9);
-//		root.right = ins.getTreeNode(20);
-//		root.left.right = ins.getTreeNode(15);
-//		root.right.left = ins.getTreeNode(7);
-//		
-//		System.out.println(ins.averageOfLevels(root));
-//		
-		
-//		//tree1
-//		TreeNode root1 = ins.getTreeNode(1);
-//		root1.left = ins.getTreeNode(2);
-//		root1.right = ins.getTreeNode(3);
-//		//tree2
-//		TreeNode root2 = ins.getTreeNode(4);
-//		root2.left = ins.getTreeNode(5);
-//		root2.right = ins.getTreeNode(6);
-//		TreeNode mergeTree = ins.mergeTrees(root1, root2);
+		//		TreeNode root = ins.getTreeNode(3);
+		//		 root.left = ins.getTreeNode(9);
+		//		root.right = ins.getTreeNode(20);
+		//		root.left.right = ins.getTreeNode(15);
+		//		root.right.left = ins.getTreeNode(7);
+		//		
+		//		System.out.println(ins.averageOfLevels(root));
+		//		
 
-//		System.out.println(mergeTree.val +" "+ mergeTree.left.val +" " + mergeTree.right.val);
+		//		//tree1
+		//		TreeNode root1 = ins.getTreeNode(1);
+		//		root1.left = ins.getTreeNode(2);
+		//		root1.right = ins.getTreeNode(3);
+		//		//tree2
+		//		TreeNode root2 = ins.getTreeNode(4);
+		//		root2.left = ins.getTreeNode(5);
+		//		root2.right = ins.getTreeNode(6);
+		//		TreeNode mergeTree = ins.mergeTrees(root1, root2);
+
+		//		System.out.println(mergeTree.val +" "+ mergeTree.left.val +" " + mergeTree.right.val);
 
 
 		//		TreeNode root = ins.getTreeNode(1);
@@ -604,7 +661,7 @@ public class LC_graph_tree_easy {
 		//		System.out.println(ansList);
 
 
-				
+
 
 
 		//LC_graph_tree_easy ins = new LC_graph_tree_easy();
