@@ -1,6 +1,7 @@
 package LeetCodeSolution;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -277,7 +278,7 @@ public class LC_graph_tree_easy {
 
 
 		//int[] frequencyTable = new int[]; // not good as will take lots of space 
-		HashSet<Integer> set = new HashSet<>();
+		HashMap<Integer,Integer> map = new HashMap<>();
 		Queue<TreeNode> queue = new LinkedList<>();
 		queue.add(root);
 		while(!queue.isEmpty()) {
@@ -288,21 +289,21 @@ public class LC_graph_tree_easy {
 				if (currentNode.left != null) {
 					queue.add(currentNode.left);
 					if (currentNode.val ==currentNode.left.val  ) {
-						if (!set.contains(currentNode.val)) set.add(currentNode.val);
+						map.put(currentNode.val, map.get(currentNode.val) + 1); // put will create the key if not exist and will update the value if key exist .
 					}
 				}
 				if (currentNode.right != null) {
 					queue.add(currentNode.right);
 					if (currentNode.val ==currentNode.right.val  ) {
-						if (!set.contains(currentNode.val)) set.add(currentNode.val);
+						map.put(currentNode.val, map.get(currentNode.val) + 1); // put will create the key if not exist and will update the value if key exist .
 					}
 				}
 
 			}
 		}
-		ansArray = new int[set.size()];
+		ansArray = new int[map.size()];
 		int i =0;
-		for (int val : set) {
+		for (int val : map) {
 			ansArray[i++] = val ;
 		}
 
