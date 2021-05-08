@@ -267,69 +267,69 @@ public class LC_graph_tree_easy {
 		return list;
 	}
 	//501. Find Mode in Binary Search Tree
-	public int[] findMode(TreeNode root) {
-		int[] ansArray ;
-		if (root.left ==null && root.right==null) {
-			ansArray = new int[1];
-			ansArray[0] = root.val;
-			return ansArray;
-		}
-
+//	public int[] findMode(TreeNode root) {
+//		int[] ansArray ;
+//		if (root.left ==null && root.right==null) {
+//			ansArray = new int[1];
+//			ansArray[0] = root.val;
+//			return ansArray;
+//		}
+//
 
 
 		//int[] frequencyTable = new int[]; // not good as will take lots of space 
-		HashMap<Integer,Integer> map = new HashMap<>();
-		Queue<TreeNode> queue = new LinkedList<>();
-		queue.add(root);
-		while(!queue.isEmpty()) {
-			int queueSize = queue.size();
-			TreeNode currentNode = queue.remove();
-			for (int i = 0; i <queueSize ; i++ ) {
-
-				if (currentNode.left != null) {
-					queue.add(currentNode.left);
-					if (currentNode.val ==currentNode.left.val  ) {
-						map.put(currentNode.val, map.get(currentNode.val) + 1); // put will create the key if not exist and will update the value if key exist .
-					}
-				}
-				if (currentNode.right != null) {
-					queue.add(currentNode.right);
-					if (currentNode.val ==currentNode.right.val  ) {
-						map.put(currentNode.val, map.get(currentNode.val) + 1); // put will create the key if not exist and will update the value if key exist .
-					}
-				}
-
-			}
-		}
-		ansArray = new int[map.size()];
-		int i =0;
-		for (int val : map) {
-			ansArray[i++] = val ;
-		}
-
-
-
-		return ansArray;
-	}
+//		HashMap<Integer,Integer> map = new HashMap<>();
+//		Queue<TreeNode> queue = new LinkedList<>();
+//		queue.add(root);
+//		while(!queue.isEmpty()) {
+//			int queueSize = queue.size();
+//			TreeNode currentNode = queue.remove();
+//			for (int i = 0; i <queueSize ; i++ ) {
+//
+//				if (currentNode.left != null) {
+//					queue.add(currentNode.left);
+//					if (currentNode.val ==currentNode.left.val  ) {
+//						map.put(currentNode.val, map.get(currentNode.val) + 1); // put will create the key if not exist and will update the value if key exist .
+//					}
+//				}
+//				if (currentNode.right != null) {
+//					queue.add(currentNode.right);
+//					if (currentNode.val ==currentNode.right.val  ) {
+//						map.put(currentNode.val, map.get(currentNode.val) + 1); // put will create the key if not exist and will update the value if key exist .
+//					}
+//				}
+//
+//			}
+//		}
+//		ansArray = new int[map.size()];
+//		int i =0;
+//		for (int val : map) {
+//			ansArray[i++] = val ;
+//		}
+//
+//
+//
+//		return ansArray;
+//	}
 
 	//530. Minimum Absolute Difference in BST
-	int min = Integer.MAX_VALUE;
-	int prev = -1; 
-	public int getMinimumDifference(TreeNode root) {
-
-		if (root ==null) return -1;
-
-		getMinimumDifference(root.left);
-
-		if (prev !=-1 ) {
-			min = Math.min(min, root.val-prev);
-		}
-		prev = root.val;
-
-		getMinimumDifference(root.right);
-
-		return min;
-	}
+//	int min = Integer.MAX_VALUE;
+//	int prev = -1; 
+//	public int getMinimumDifference(TreeNode root) {
+//
+//		if (root ==null) return -1;
+//
+//		getMinimumDifference(root.left);
+//
+//		if (prev !=-1 ) {
+//			min = Math.min(min, root.val-prev);
+//		}
+//		prev = root.val;
+//
+//		getMinimumDifference(root.right);
+//
+//		return min;
+//	}
 
 	//543. Diameter of Binary Tree
 	public int diameterOfBinaryTree(TreeNode root) {
