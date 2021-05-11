@@ -24,9 +24,7 @@ public class Google_Int_prep_pre {
 
 
 			if (map.containsKey(s.charAt(right))){
-				//int minIndex = Collections.min(map.values());
 				left = Math.max(left, map.get(s.charAt(right))) ;
-						// map.remove(s.charAt(left));
 			}
 			maxLength = Math.max(maxLength , right-left) ;
 			map.put(s.charAt(right), right++);
@@ -75,5 +73,7 @@ public class Google_Int_prep_pre {
 		//		};
 
 	}
+	
+	
 
 }
