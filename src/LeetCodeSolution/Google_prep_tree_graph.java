@@ -161,6 +161,65 @@ public class Google_prep_tree_graph {
 	        return Math.max(left + root.val, right + root.val);
 	    }
 
+	    // 235 - common ancestor in a binary tree
+	    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+
+	        // Value of current node or parent node.
+	        int parentVal = root.val;
+
+	        // Value of p
+	        int pVal = p.val;
+
+	        // Value of q;
+	        int qVal = q.val;
+
+	        if (pVal > parentVal && qVal > parentVal) {
+	            // If both p and q are greater than parent
+	            return lowestCommonAncestor(root.right, p, q);
+	        } else if (pVal < parentVal && qVal < parentVal) {
+	            // If both p and q are lesser than parent
+	            return lowestCommonAncestor(root.left, p, q);
+	        } else {
+	            // We have found the split point, i.e. the LCA node.
+	            return root;
+	        }
+	    }
+	    // 572 - subtree of another tree 
+	    public boolean isSubtree(TreeNode root, TreeNode subRoot) {
+			//1
+	        if(root == null && subRoot == null) return true;
+	        if(root == null && subRoot != null || root != null && subRoot == null) return false;
+	        
+			//2
+	        if(isEqual(root, subRoot)) return true;
+			
+			//3
+	        return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+	    }
+	    
+	    public boolean isEqual(TreeNode root, TreeNode subRoot){
+	        if(root == null && subRoot == null) return true;
+	        if(root == null && subRoot != null || root != null && subRoot == null) return false;
+	        return root.val == subRoot.val && isEqual(root.left, subRoot.left) && isEqual(root.right, subRoot.right);
+	    }
+	    
+	    // Validate a BST 
+	    public boolean isValidBST(TreeNode root) {
+	        if (root ==null) return true;
+	        
+	   		if (root.left ==null && root.right ==null) return true;
+	   		
+	   		boolean isvali = false ;
+	   		
+	   		if (root.left== null ) {
+	   			isvali = (root.val < root.right.val) ?true :false;
+	   		}else if (root.right== null ) {
+	   			isvali =  (root.left.val < root.val)?true:false ;
+	   		}else isvali =  (root.left.val < root.val && root.val < root.right.val) ?true :false;
+	   		return isValidBST(root.left)&& isValidBST(root.right) && isvali ;
+	   		
+	       }
+	    
 	public class TreeNode {
 		int val;
 		TreeNode left;
