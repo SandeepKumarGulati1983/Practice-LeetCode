@@ -7,6 +7,33 @@ import java.util.Stack;
 
 public class Google_prep_graphs {
 
+	
+	// validate binary tree -- via inorder traversal -- as in that the traversal is in sorted order  .. 1,2,3,4,5,6 ...
+	 // We use Integer instead of int as it supports a null value.
+    private Integer prev;
+
+    public boolean isValidBST(TreeNode root) {
+        prev = null;
+        return inorder(root);
+    }
+
+    private boolean inorder(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        //return only on false 
+        if (!inorder(root.left)) {
+            return false;
+        }
+        //inorder(root.left);
+        if (prev != null && root.val <= prev) {
+            return false;
+        }
+        prev = root.val;
+        return inorder(root.right);
+    }
+	
+	
 	//207. Course Schedule
 
 	public boolean canFinish(int numCourses, int[][] prerequisites) {
@@ -93,6 +120,27 @@ public class Google_prep_graphs {
 			return null;
 		}
 	}
+	
+	// 108. Convert Sorted Array to Binary Search Tree
+	public TreeNode sortedArrayToBST(int[] nums) {
+		 
+    	return arryToBST(nums, 0 , nums.length-1);
+    }
+    
+    TreeNode arryToBST(int[] nums , int low , int high) {
+    	
+    	if (low > high) return null ;
+    	
+    	int mid = (high+low )/ 2;
+    	
+    	TreeNode head = new TreeNode(nums[mid]);
+    	head.left = arryToBST(nums ,low, mid-1 );
+    	head.right = arryToBST(nums ,mid+1, high );
+    	
+    	return head;
+    	
+    }
+	
 
 	//topological sort , user for finalising dependencies or prerequisites 
 	// for DAG - directed acyclic graph 
@@ -151,7 +199,55 @@ public class Google_prep_graphs {
 			System.out.print( sortedArray[j] ); System.out.println(“”);
 	} // end topo
 
-	// utility functions and classes -----------------------------------
+	
+	//329. Longest Increasing Path in a Matrix
+	    public int longestIncreasingPath(int[][] matrix) {
+	        
+	        int[][] memo = new int[matrix.length][matrix[0].length];
+	        
+	        int max = 0;
+	        
+	        for (int i = 0; i < matrix.length; i++) {
+	            for (int j = 0; j < matrix[0].length; j++) {
+	                int pathLen = dfs(matrix, i, j, memo, Integer.MIN_VALUE);
+	                
+	                max = Math.max(pathLen, max);
+	            }
+	        }
+	        
+	        return max;
+	    }
+	    
+	    int dfs(int[][] matrix, int i, int j, int[][] memo, int prevVal) {
+	        
+	        if (i < 0 || j < 0 || i >= matrix.length || j >= matrix[0].length) {
+	            return 0;
+	        }
+	        
+	        if (prevVal >= matrix[i][j]) {
+	            return 0;
+	        }
+	        
+	        if (memo[i][j] != 0) {
+	            return memo[i][j];
+	        }
+	        
+	        int max = 
+	          Math.max(
+	            Math.max(
+	                dfs(matrix, i+1, j, memo, matrix[i][j]),
+	                dfs(matrix, i, j+1, memo, matrix[i][j])),
+	            Math.max(
+	                dfs(matrix, i-1, j, memo, matrix[i][j]),
+	                dfs(matrix, i, j-1, memo, matrix[i][j])));
+	        
+	        memo[i][j] = max + 1;
+	        
+	        return memo[i][j];
+	    }
+
+	
+	// utility functions and classes ------------------------------------------------------
 
 	int noSuccessors() {
 		return 1 ;
