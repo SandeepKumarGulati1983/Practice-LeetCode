@@ -142,13 +142,6 @@ public class Google_prep_graphs {
     }
 	
 
-	//topological sort , user for finalising dependencies or prerequisites 
-	// for DAG - directed acyclic graph 
-
-	// detect cycle in a graph 
-
-	
-
 	
 	//329. Longest Increasing Path in a Matrix
 	    public int longestIncreasingPath(int[][] matrix) {
