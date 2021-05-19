@@ -3,6 +3,7 @@ package LeetCodeSolution;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class Backtracking_LC {
 
@@ -158,6 +159,76 @@ public class Backtracking_LC {
 //		   return true;
 //		} 
 //	
+	
+	// 22. Generate Parentheses 
+	    public List<String> generateParenthesis(int n) {
+	        List<String> ans = new ArrayList();
+	        backtrack(ans, new StringBuilder(), 0, 0, n);
+	        return ans;
+	    }
+
+	    public void backtrack(List<String> ans, StringBuilder cur, int open, int close, int max){
+	        if (cur.length() == max * 2) {
+	            ans.add(cur.toString());
+	            return;
+	        }
+
+	        if (open < max) {
+	            cur.append("(");
+	            backtrack(ans, cur, open+1, close, max);
+	            cur.deleteCharAt(cur.length() - 1);
+	        }
+	        if (close < open) {
+	            cur.append(")");
+	            backtrack(ans, cur, open, close+1, max);
+	            cur.deleteCharAt(cur.length() - 1);
+	        }
+	    }
+	    
+	    //17. Letter Combinations of a Phone Number
+	       
+	        
+	        public List<String> letterCombinations(String digits) {
+	        	
+	        	  List<String> combinations = new ArrayList<>();
+	 	         Map<Character, String> letters = Map.of(
+	 	            '2', "abc", '3', "def", '4', "ghi", '5', "jkl", 
+	 	            '6', "mno", '7', "pqrs", '8', "tuv", '9', "wxyz");
+	 	         String phoneDigits;
+	 	         //----------------------
+	        	
+	            // If the input is empty, immediately return an empty answer array
+	            if (digits.length() == 0) {
+	                return combinations;
+	            }
+	            
+	            // Initiate backtracking with an empty path and starting index of 0
+	            phoneDigits = digits;
+	           // backtrack(0, new StringBuilder());
+	            backtrack(combinations, new StringBuilder(),phoneDigits ,letters,  0 );
+	            return combinations;
+	        }
+	        
+	        private void backtrack(List<String> oList, StringBuilder path ,String inputDigits,Map<Character, String> letters,  int index) {
+	            // If the path is the same length as digits, we have a complete combination
+	            if (path.length() == inputDigits.length()) {
+	            	oList.add(path.toString());
+	                return; // Backtrack
+	            }
+	            
+	            // Get the letters that the current digit maps to, and loop through them
+	            String possibleLetters = letters.get(inputDigits.charAt(index));
+	            for (char letter: possibleLetters.toCharArray()) {
+	                // Add the letter to our current path
+	                path.append(letter);
+	                // Move on to the next digit
+	                backtrack(oList, path, inputDigits , letters, index + 1);
+	                // Backtrack by removing the letter before moving onto the next
+	                path.deleteCharAt(path.length() - 1);
+	            }
+	        }
+	
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
