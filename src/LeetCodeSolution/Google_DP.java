@@ -70,9 +70,51 @@ public class Google_DP {
 	            
 	        }
 	        return sum;
-	        
-	        
 	    }
 
+	    // Coin change problem 
+	    static int  minSofar = Integer.MAX_VALUE;
+	    public static void CoinChange(int[] nums, List<Integer> choosen, int start, int target) {
+
+	        if (target==0) {
+	            System.out.println(choosen);
+	            if(minSofar>choosen.size())
+	                minSofar=choosen.size();            
+	        }
+	        else if(target>1) {
+	            for (int i = start; i < nums.length; i++) {
+	                choosen.add(nums[i]);
+	                CoinChange(nums, choosen, i,target-nums[i]); 
+	                choosen.remove(choosen.size() - 1);
+
+	            }
+	        }
+	    }
+
+	    void mainOfCoinChange(String[] args) {    
+	        int [] denominations = {1,2,5};             
+	        CoinChange(denominations, new ArrayList<Integer>(), 0, 10 );        
+	        System.out.println("Min : " + minSofar);        
+	    } 
+	    
+	    // another solution for coin cahnge problem 
+	    public int coinChange(int[] coins, int amount) {
+	        if (amount < 1) return 0;
+	        return coinChange(coins, amount, new int[amount]);
+	      }
+
+	      private int coinChange(int[] coins, int rem, int[] count) {
+	        if (rem < 0) return -1;
+	        if (rem == 0) return 0;
+	        if (count[rem - 1] != 0) return count[rem - 1];
+	        int min = Integer.MAX_VALUE;
+	        for (int coin : coins) {
+	          int res = coinChange(coins, rem - coin, count);
+	          if (res >= 0 && res < min)
+	            min = 1 + res;
+	        }
+	        count[rem - 1] = (min == Integer.MAX_VALUE) ? -1 : min;
+	        return count[rem - 1];
+	      }
 
 }
