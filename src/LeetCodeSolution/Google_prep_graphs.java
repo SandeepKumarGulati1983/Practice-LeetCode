@@ -11,6 +11,7 @@ public class Google_prep_graphs {
 
 	// is cycle -- best explained in GFG -- DFS way -- https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
 	// use this in  topological sort -- 
+	
 	int[] vertexs ; // this is number of node 
 	List<List<Integer>> adj = new ArrayList<>(vertexs.length);
 	private boolean isCyclicUtil(int i, boolean[] visited,
