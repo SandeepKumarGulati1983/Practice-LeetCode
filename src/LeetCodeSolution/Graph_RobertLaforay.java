@@ -54,7 +54,7 @@ public class Graph_RobertLaforay {
 		Stack<Vertex> stack =  new Stack<>();
 		stack.push(v);
 		while (!stack.isEmpty()) {
-			Vertex curV = stack.peek();  //**** can't use pop as then , will not able to get more then one neighbour of a same node 
+			Vertex curV = stack.peek();  //**** can't use pop as then , will not be able to get more then one neighbour of a same node 
 
 			Vertex v1 = getAdjUnvisitedVertex(curV);
 			if (v1 != null ) { // not -1 as I am taking Vertex node and not Integer 
