@@ -1,7 +1,13 @@
 =========Classes 
-23 9th july  - practice session - https://notability.com/n/WqpG3P~C1b8uSgAL2f3NF
-22 7th july - https://notability.com/n/1UXDAFxIC2~AqRXCUhCRUA
-21 5th july. - recursion 2. - https://notability.com/n/1oTsNY~BW8hfJenjPdMZ_H
+
+-------downloaded -------------
+Advance Notes 
+
+Intermediate notes ----------------------
+23 - 10 july | tree. - https://notability.com/n/1eYfI9Wmd6Pfl4_q7nFFLF
+22 9th july  - practice session - https://notability.com/n/WqpG3P~C1b8uSgAL2f3NF
+21 7th july - https://notability.com/n/1UXDAFxIC2~AqRXCUhCRUA
+20 5th july. - recursion 2. - https://notability.com/n/1oTsNY~BW8hfJenjPdMZ_H
 19 3 july - recusrsion - https://notability.com/n/sJDHYMBS5efV22mytdRti
 18 hashing 2. -- ???
 17 28 june - hashing - https://notability.com/n/1QPBjBm006I9Xh2k442gzG
@@ -11,8 +17,6 @@
 13 sorting - https://notability.com/n/1GCYCZyrK1PO9acbYfvB_G
 12th class - Bit manipulation https://notability.com/n/1CQwK3ot88vdNprK0yuwoI
 11 th class. - Test 
-
--------downloaded -------------
 10th class - interview prep  https://notability.com/n/0WLlP0ump8XPgHZQ5EbTps
 9th class -sliding window  https://notability.com/n/1E4nzMvz0BB91gIyydbsry
 8th class  | 2 d array - https://notability.com/n/0GgOTHKIS4hcD2LpXDkM9W
@@ -164,7 +168,16 @@ Day 6 - carry forward  - p 78
 1. find no of pair having 'a'. and 'g'. --  [b a a g d c a g]  , condition - i< j  && A[i] =a && A[j] = g 
 2. Leader in the array  -- leader means the element is greater then all right element  -- condition last will always be the leader 
 3. find the length of smallest subarray , which is having both min and max of the array  [1 2 3 1 3 4 6 4 6 3 ]
+Day 16 - String 
+	1. https://leetcode.com/problems/longest-palindromic-substring/editorial/ 
+	2. https://leetcode.com/problems/add-binary/ 
+Day 17 - hashing 
+	1. https://leetcode.com/problems/subarray-sum-equals-k/ 
+	2. https://leetcode.com/problems/verifying-an-alien-dictionary/description/ 
 
 
 pattern in DS 
 https://www.educative.io/courses/grokking-coding-interview-patterns-java 
+
+20 most system design questions with solution. by Gaurav Sen
+https://interviewready.io/blog/interviewready-20-system-design 
